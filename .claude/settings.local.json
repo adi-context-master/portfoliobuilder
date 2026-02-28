@@ -39,7 +39,15 @@
       "Bash(sleep 5 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/builder)",
       "Bash(curl -s http://localhost:3000/api/generate-portfolio \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\"theme\":\"minimal\",\"data\":{\"name\":\"John Doe\",\"title\":\"Software Engineer\",\"email\":\"john@example.com\",\"phone\":\"555-1234\",\"location\":\"San Francisco, CA\",\"website\":\"\",\"linkedin\":\"\",\"github\":\"github.com/johndoe\",\"summary\":\"Experienced developer.\",\"experience\":[{\"company\":\"Acme Corp\",\"role\":\"Senior Developer\",\"startDate\":\"2020\",\"endDate\":\"Present\",\"description\":\"Led a team of 5 engineers.\"}],\"education\":[{\"institution\":\"MIT\",\"degree\":\"BS\",\"field\":\"Computer Science\",\"startDate\":\"2014\",\"endDate\":\"2018\"}],\"skills\":[\"TypeScript\",\"React\",\"Node.js\",\"Python\"],\"projects\":[{\"name\":\"Portfolio Builder\",\"description\":\"A tool to build portfolios\",\"url\":\"https://example.com\",\"technologies\":[\"Next.js\",\"Tailwind\"]}]}}' | head -c 500)",
-      "Bash(lsof -ti:3000 | xargs kill 2>/dev/null; echo \"done\")"
+      "Bash(lsof -ti:3000 | xargs kill 2>/dev/null; echo \"done\")",
+      "Bash(npm run build 2>&1 | tail -15)",
+      "Bash(git add src/lib/groq.ts && git diff --cached --stat)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nFix: lazy-init Groq client to avoid build-time crash\n\nThe Groq SDK was instantiated at module level, which requires\nGROQ_API_KEY at build time. Now initialized only when called.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(npx tsc --noEmit src/templates/bauhaus.ts 2>&1 || true)",
+      "Bash(npx tsc --noEmit 2>&1 | grep -i bauhaus || echo \"No bauhaus-specific errors\")",
+      "Bash(npx tsc --noEmit src/templates/monochrome.ts 2>&1 || true)",
+      "Bash(npx tsc --noEmit src/templates/linear.ts 2>&1 || true)",
+      "Bash(lsof -ti:3000 -ti:3001 | xargs kill 2>/dev/null; echo \"done\")"
     ]
   }
 }

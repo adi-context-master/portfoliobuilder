@@ -4,7 +4,10 @@ export type ThemeId =
   | "creative"
   | "professional"
   | "developer"
-  | "elegant";
+  | "elegant"
+  | "monochrome"
+  | "bauhaus"
+  | "linear";
 
 export interface ThemeMeta {
   id: ThemeId;

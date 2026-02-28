@@ -10,6 +10,9 @@ const validThemes: ThemeId[] = [
   "professional",
   "developer",
   "elegant",
+  "monochrome",
+  "bauhaus",
+  "linear",
 ];
 
 export async function POST(request: NextRequest) {

@@ -6,6 +6,9 @@ import { generate as generateCreative } from "./creative";
 import { generate as generateProfessional } from "./professional";
 import { generate as generateDeveloper } from "./developer";
 import { generate as generateElegant } from "./elegant";
+import { generate as generateMonochrome } from "./monochrome";
+import { generate as generateBauhaus } from "./bauhaus";
+import { generate as generateLinear } from "./linear";
 
 type GenerateFn = (data: ResumeData) => string;
 
@@ -16,6 +19,9 @@ const generators: Record<ThemeId, GenerateFn> = {
   professional: generateProfessional,
   developer: generateDeveloper,
   elegant: generateElegant,
+  monochrome: generateMonochrome,
+  bauhaus: generateBauhaus,
+  linear: generateLinear,
 };
 
 export const themes: ThemeMeta[] = [
@@ -54,6 +60,24 @@ export const themes: ThemeMeta[] = [
     name: "Elegant",
     description: "Warm cream, gold accents, editorial typography",
     colors: { primary: "#fdf8f0", secondary: "#b8860b", accent: "#d4a853" },
+  },
+  {
+    id: "monochrome",
+    name: "Monochrome",
+    description: "Pure black & white, serif editorial, oversized type",
+    colors: { primary: "#000000", secondary: "#ffffff", accent: "#525252" },
+  },
+  {
+    id: "bauhaus",
+    name: "Bauhaus",
+    description: "Geometric constructivism, primary colors, hard shadows",
+    colors: { primary: "#F0F0F0", secondary: "#D02020", accent: "#1040C0" },
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    description: "Cinematic dark mode, ambient lighting, glass effects",
+    colors: { primary: "#050506", secondary: "#5E6AD2", accent: "#6872D9" },
   },
 ];
 
