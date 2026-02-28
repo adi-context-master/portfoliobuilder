@@ -1,8 +1,10 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+function getGroqClient() {
+  return new Groq({
+    apiKey: process.env.GROQ_API_KEY,
+  });
+}
 
 const SYSTEM_PROMPT = `You are a resume parser. Extract structured data from the resume text provided.
 Return ONLY valid JSON matching this exact schema (no markdown, no explanation):
@@ -54,6 +56,7 @@ Rules:
 - Return ONLY the JSON object, nothing else`;
 
 export async function parseResumeWithAI(resumeText: string) {
+  const groq = getGroqClient();
   const completion = await groq.chat.completions.create({
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
